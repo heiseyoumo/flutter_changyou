@@ -1,94 +1,116 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_changyou/wallet_page.dart';
 
-import 'main.dart';
+import 'discover_page.dart';
+import 'home_page.dart';
+import 'mine_page.dart';
 
-void main() => runApp(new MyApp());
-
-class MyApp extends StatelessWidget {
+class BottomNavigationWidget extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: new SplashPage(),
+  State<BottomNavigationWidget> createState() {
+    return _BottomNavigationWidget();
+  }
+}
+
+class _BottomNavigationWidget extends State<BottomNavigationWidget> {
+  List<Widget> list;
+  var _scaffoldkey = new GlobalKey<ScaffoldState>();
+  var _currentIndex = 0;
+  var appBottomIcons = [
+    ["asset/images/ic_home_normal.png", "asset/images/ic_home_selected.png"],
+    ["asset/images/ic_discover_normal.png", "asset/images/ic_wallet_selected.png"],
+    ["asset/images/ic_wallet_normal.png", "asset/images/ic_wallet_selected.png"],
+    ["asset/images/ic_mine_normal.png", "asset/images/ic_mine_selected.png"]
+  ];
+  var appTitle = ["首页", "发现", "钱包", "我的"];
+
+  Widget getBottomIcons(position) {
+    if (_currentIndex == position) {
+      return Image.asset(
+        appBottomIcons[_currentIndex][1],
+        height: 60,
+        width: 60,
+      );
+    }
+    return Image.asset(
+      appBottomIcons[position][0],
+      height: 60,
+      width: 60,
     );
   }
-}
 
-class SplashPage extends StatefulWidget {
-  @override
-  State<SplashPage> createState() {
-    return new _SplashPage();
+  Widget getBottomTitle(position) {
+    if (_currentIndex == position) {
+      return Text(
+        appTitle[_currentIndex],
+        style: TextStyle(fontSize: 18, color: Colors.black),
+      );
+    }
+    return Text(
+      appTitle[position],
+      style: TextStyle(fontSize: 16, color: Colors.black87),
+    );
   }
-}
-
-class _SplashPage extends State<SplashPage> {
-  int countDown = 3;
-  Timer timer;
 
   @override
   void initState() {
+    list = new List<Widget>()
+      ..add(HomePage("首页"))
+      ..add(DiscoverPage("发现"))
+      ..add(WalletPage("钱包"))
+      ..add(MinePage("我的"));
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        countDown--;
-        if (countDown == 0) {
-          timer.cancel();
-          goToMainPage();
-        }
-      });
-    });
   }
 
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
-  void goToMainPage() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (_) => BottomNavigationWidget()));
+  void showSnackBar(message, position) {
+    _scaffoldkey.currentState.showSnackBar(SnackBar(
+      content: Text("我是:" + appTitle[position]),
+      duration: Duration(seconds: 1),
+      action: SnackBarAction(
+        label: "点我啊",
+        textColor: Colors.red,
+        onPressed: () {
+          print("我点击了哈哈哈");
+        },
+      ),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: <Widget>[
-          new ConstrainedBox(
-            constraints: BoxConstraints.expand(),
-            child: new Image.asset(
-              "asset/images/bg_launch_page.png",
-              fit: BoxFit.fill,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        key: _scaffoldkey,
+        body: list[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              icon: getBottomIcons(0),
+              title: getBottomTitle(0),
             ),
-          ),
-          Positioned(
-            bottom: 20,
-            right: 10,
-            child: GestureDetector(
-              onTap: () {
-                timer.cancel();
-                goToMainPage();
-              },
-              child: Container(
-                alignment: Alignment.center,
-                width: 60.0,
-                height: 30.0,
-                decoration: BoxDecoration(
-                  color: Color(0x44000000),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  "跳过" + countDown.toString(),
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+            BottomNavigationBarItem(
+              icon: getBottomIcons(1),
+              title: getBottomTitle(1),
             ),
-          )
-        ],
+            BottomNavigationBarItem(
+              icon: getBottomIcons(2),
+              title: getBottomTitle(2),
+            ),
+            BottomNavigationBarItem(
+              icon: getBottomIcons(3),
+              title: getBottomTitle(3),
+            ),
+          ],
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+              showSnackBar("我是你大爷啊", index);
+            });
+          },
+        ),
       ),
     );
   }
