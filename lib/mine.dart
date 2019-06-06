@@ -56,7 +56,7 @@ class _SplashPage extends State<SplashPage> {
           new ConstrainedBox(
             constraints: BoxConstraints.expand(),
             child: new Image.asset(
-              "asset/images/bg_launch_page.png",
+              "asset/images/splash.jpg",
               fit: BoxFit.fill,
             ),
           ),
