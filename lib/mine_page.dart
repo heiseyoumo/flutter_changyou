@@ -25,163 +25,163 @@ class _MinePageState extends State<MinePage> {
         ),
         backgroundColor: Colors.yellow,
       ),
-      body: Container(
-          color: Color(0xFFf0eff5),
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 100,
-                color: Colors.yellow,
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.topRight,
-                      margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                      height: 40,
-                      child: Image.asset(
-                        "asset/images/no_message.png",
-                        height: 28,
-                        width: 28,
-                      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 100,
+              color: Colors.yellow,
+              padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topRight,
+                    margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                    height: 40,
+                    child: Image.asset(
+                      "asset/images/no_message.png",
+                      height: 28,
+                      width: 28,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "asset/images/ic_personal_head.png",
-                            height: 46,
-                            width: 46,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Text("昵称是黑色幽默"),
-                          ),
-                          GestureDetector(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff2F2F2F),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                              ),
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.fromLTRB(13, 4, 13, 4),
-                              child: Text(
-                                "签到领积分",
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Color(0xffFFC922),
-                                ),
-                              ),
+                  ),
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "asset/images/ic_personal_head.png",
+                          height: 46,
+                          width: 46,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text("昵称是黑色幽默"),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xff2F2F2F),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            height: 16,
-                            color: Color(0xFFFFC90A),
-                            width: 2,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Text("我的订单"),
-                          ),
-                          GestureDetector(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.fromLTRB(13, 4, 13, 4),
                             child: Text(
-                              "所有订单",
-                              style: TextStyle(color: Color(0x66000000)),
+                              "签到领积分",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Color(0xffFFC922),
+                              ),
                             ),
-                            onTap: () {
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("点击所有订单"),
-                                duration: Duration(milliseconds: 300),
-                              ));
-                            },
                           ),
-                        ],
-                      ),
-                      margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                        )
+                      ],
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset("asset/images/wait_pay.png",
-                                    height: 26, width: 26),
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text("待付款",
-                                      style: TextStyle(fontSize: 14)),
-                                )
-                              ],
-                            ),
-                            flex: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset("asset/images/wait_pay.png",
-                                    height: 26, width: 26),
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text("待发货",
-                                      style: TextStyle(fontSize: 14)),
-                                )
-                              ],
-                            ),
-                            flex: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset("asset/images/wait_pay.png",
-                                    height: 26, width: 26),
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text("待收货",
-                                      style: TextStyle(fontSize: 14)),
-                                )
-                              ],
-                            ),
-                            flex: 1,
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                Image.asset("asset/images/wait_pay.png",
-                                    height: 26, width: 26),
-                                Container(
-                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text("退货退款",
-                                      style: TextStyle(fontSize: 14)),
-                                )
-                              ],
-                            ),
-                            flex: 1,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              MineBottomList()
-            ],
-          )),
+            ),
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          height: 16,
+                          color: Color(0xFFFFC90A),
+                          width: 2,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text("我的订单"),
+                        ),
+                        GestureDetector(
+                          child: Text(
+                            "所有订单",
+                            style: TextStyle(color: Color(0x66000000)),
+                          ),
+                          onTap: () {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text("点击所有订单"),
+                              duration: Duration(milliseconds: 300),
+                            ));
+                          },
+                        ),
+                      ],
+                    ),
+                    margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                  ),
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset("asset/images/wait_pay.png",
+                                  height: 26, width: 26),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                child:
+                                    Text("待付款", style: TextStyle(fontSize: 14)),
+                              )
+                            ],
+                          ),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset("asset/images/wait_pay.png",
+                                  height: 26, width: 26),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                child:
+                                    Text("待发货", style: TextStyle(fontSize: 14)),
+                              )
+                            ],
+                          ),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset("asset/images/wait_pay.png",
+                                  height: 26, width: 26),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                child:
+                                    Text("待收货", style: TextStyle(fontSize: 14)),
+                              )
+                            ],
+                          ),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset("asset/images/wait_pay.png",
+                                  height: 26, width: 26),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                child: Text("退货退款",
+                                    style: TextStyle(fontSize: 14)),
+                              )
+                            ],
+                          ),
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            MineBottomList()
+          ],
+        ),
+      ),
     );
   }
 }
@@ -190,7 +190,7 @@ class MineBottomList extends StatelessWidget {
   Widget getBottomContainer(context, url, content) {
     return Container(
       margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-      height: 50,
+      height: 60,
       child: GestureDetector(
         child: Row(
           children: <Widget>[
