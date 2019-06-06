@@ -64,8 +64,8 @@ class _SplashPage extends State<SplashPage> {
             ),
           ),
           Positioned(
-            bottom: 15,
-            right: 15,
+            bottom: 10,
+            right: 10,
             child: GestureDetector(
               onTap: () {
                 timer.cancel();
