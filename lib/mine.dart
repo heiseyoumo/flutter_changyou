@@ -79,7 +79,7 @@ class _SplashPage extends State<SplashPage> {
                 child: Text(
                   "跳过" + countDown.toString(),
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
