@@ -131,14 +131,14 @@ class _FeedbackContent extends State<FeedbackContent> {
             color: Colors.red,
             highlightColor: Colors.blue,
             textColor: Colors.white,
-            child: Text("别点我"),
+            child: Text("MaterialButton别点我"),
           ),
           CupertinoButton(
             onPressed: () {
               print("别点我啊");
             },
             color: Colors.red,
-            child: Text("别点我"),
+            child: Text("CupertinoButton别点我"),
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
           Row(
