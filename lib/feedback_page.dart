@@ -46,7 +46,7 @@ class _FeedbackContent extends State<FeedbackContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           RaisedButton(
@@ -275,6 +275,24 @@ class _FeedbackContent extends State<FeedbackContent> {
                       style: TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 140),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                MaterialButton(
+                  child: Text("ios日期选择框"),
+                  onPressed: () {},
+                  color: Colors.red,
+                ),
+                MaterialButton(
+                  child: Text("ios时间选择框"),
+                  onPressed: () {},
+                  color: Colors.red,
                 ),
               ],
             ),
