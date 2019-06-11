@@ -13,6 +13,7 @@ class _SetWidget extends State<SetWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text("设置"),
+        centerTitle: true,
       ),
       body: Center(
         child: RaisedButton(
