@@ -217,9 +217,6 @@ class _FeedbackContent extends State<FeedbackContent> {
                 CupertinoSwitch(
                   value: true,
                 ),
-                CupertinoSwitch(
-                  value: false,
-                ),
                 MaterialButton(
                   onPressed: () {
                     showDatePicker(
@@ -250,7 +247,7 @@ class _FeedbackContent extends State<FeedbackContent> {
                   },
                   color: Colors.red,
                   child: Text(
-                    "弹出日期选择框",
+                    "日期选择框",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -258,6 +255,25 @@ class _FeedbackContent extends State<FeedbackContent> {
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: MaterialButton(
+                    color: Colors.red,
+                    onPressed: () {
+                      showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      ).then((timeOfDay) {
+                        print(
+                            "小小时小时小时小时小时小时时:${timeOfDay.hour},分钟分钟分钟分钟分钟分钟:${timeOfDay.minute}");
+                      });
+                    },
+                    child: Text(
+                      "时间选择器",
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
