@@ -29,8 +29,8 @@ class BodyCenter extends StatefulWidget {
 class _BodyCenter extends State<BodyCenter> {
   var path = "没有";
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  String userName;
-  String password;
+  String userName = "";
+  String password = "";
 
   Future getPath() async {
     // 获取应用文档目录并创建文件
@@ -104,6 +104,7 @@ class _BodyCenter extends State<BodyCenter> {
                     }
                     return null;
                   },
+                  initialValue: "$userName",
                   onSaved: (name) {
                     this.userName = name;
                   },
@@ -119,6 +120,7 @@ class _BodyCenter extends State<BodyCenter> {
                     }
                     return null;
                   },
+                  initialValue: "$password",
                   onSaved: (pwd) {
                     this.password = pwd;
                   },
@@ -154,13 +156,15 @@ class _BodyCenter extends State<BodyCenter> {
                     onPressed: () {
                       Future<String> s = readFile("userName");
                       s.then((dynamic name) {
-                        userName = name;
-                        print(userName);
+                        setState(() {
+                          userName = name;
+                        });
                       });
                       Future<String> s1 = readFile("password");
                       s1.then((dynamic pwd) {
-                        password = pwd;
-                        print(password);
+                        setState(() {
+                          password = pwd;
+                        });
                       });
                     },
                     color: Colors.red,
