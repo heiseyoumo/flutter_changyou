@@ -44,14 +44,15 @@ class _BodyCenter extends State<BodyCenter> {
     var currentState = _formKey.currentState;
     if (currentState.validate()) {
       currentState.save();
-      writeToFile("用户名是:$userName,密码是:$password");
+      writeToFile("userName", userName);
+      writeToFile("password", password);
     }
   }
 
-  Future writeToFile(String info) async {
+  Future writeToFile(String key, String info) async {
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
-    File file = new File('$documentsPath/notes');
+    File file = new File('$documentsPath/$key');
     if (!file.existsSync()) {
       file.createSync();
     }
@@ -61,15 +62,15 @@ class _BodyCenter extends State<BodyCenter> {
     }
   }
 
-  Future readFile() async {
+  Future<String> readFile(String key) async {
     Directory documentsDir = await getApplicationDocumentsDirectory();
     String documentsPath = documentsDir.path;
-    File file = new File('$documentsPath/notes');
+    File file = new File('$documentsPath/$key');
     if (!file.existsSync()) {
       file.createSync();
     }
     String readAsStringSync = file.readAsStringSync();
-    print(readAsStringSync);
+    return readAsStringSync;
   }
 
   @override
@@ -151,7 +152,16 @@ class _BodyCenter extends State<BodyCenter> {
                   margin: EdgeInsets.all(20),
                   child: RaisedButton(
                     onPressed: () {
-                      readFile();
+                      Future<String> s = readFile("userName");
+                      s.then((dynamic name) {
+                        userName = name;
+                        print(userName);
+                      });
+                      Future<String> s1 = readFile("password");
+                      s1.then((dynamic pwd) {
+                        password = pwd;
+                        print(password);
+                      });
                     },
                     color: Colors.red,
                     child: Text(
