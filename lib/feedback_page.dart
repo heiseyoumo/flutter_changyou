@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_changyou/shared_preference.dart';
 
@@ -116,7 +117,54 @@ class _FeedbackContent extends State<FeedbackContent> {
                 Text("年龄:" + "$userAge")
               ],
             ),
-          )
+          ),
+          RaisedButton(
+            onPressed: () {
+              print("别点我啊");
+            },
+            color: Colors.red,
+            textColor: Colors.white,
+            child: Text("别点我"),
+          ),
+          MaterialButton(
+            onPressed: () {
+              print("别点我啊");
+            },
+            color: Colors.red,
+            highlightColor: Colors.blue,
+            textColor: Colors.white,
+            child: Text("别点我"),
+          ),
+          CupertinoButton(
+            onPressed: () {
+              print("别点我啊");
+            },
+            color: Colors.red,
+            child: Text("别点我"),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          Row(
+            children: <Widget>[
+              Checkbox(
+                value: true,
+                onChanged: (checked) {
+                  print(checked);
+                },
+              ),
+              Checkbox(
+                value: false,
+                onChanged: (checked) {
+                  print(checked);
+                },
+              ),
+              Checkbox(
+                value: false,
+                onChanged: (checked) {
+                  print(checked);
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
