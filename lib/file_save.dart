@@ -104,7 +104,6 @@ class _BodyCenter extends State<BodyCenter> {
                     }
                     return null;
                   },
-                  initialValue: "$userName",
                   onSaved: (name) {
                     this.userName = name;
                   },
@@ -120,7 +119,6 @@ class _BodyCenter extends State<BodyCenter> {
                     }
                     return null;
                   },
-                  initialValue: "$password",
                   onSaved: (pwd) {
                     this.password = pwd;
                   },
@@ -157,13 +155,13 @@ class _BodyCenter extends State<BodyCenter> {
                       Future<String> s = readFile("userName");
                       s.then((dynamic name) {
                         setState(() {
-                          userName = name;
+                          this.userName = name;
                         });
                       });
                       Future<String> s1 = readFile("password");
                       s1.then((dynamic pwd) {
                         setState(() {
-                          password = pwd;
+                          this.password = pwd;
                         });
                       });
                     },
