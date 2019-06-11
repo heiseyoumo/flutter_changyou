@@ -4,6 +4,8 @@ import 'package:flutter_changyou/shared_preference.dart';
 
 import 'common_dialog.dart';
 
+void main() => runApp(new FeedbackWidget());
+
 class FeedbackWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,9 @@ class _FeedbackContent extends State<FeedbackContent> {
   String userName = "";
   int userAge = 0;
   int count = 0;
+  var isChecked = false;
+  String _character = 'A';
+  var isSwitchChecked = false;
 
   @override
   void initState() {
@@ -64,7 +69,7 @@ class _FeedbackContent extends State<FeedbackContent> {
             },
             child: Text(
               "弹出自定义的对话框",
-              style: TextStyle(fontSize: 23, color: Colors.red),
+              style: TextStyle(fontSize: 14, color: Colors.red),
             ),
           ),
           RaisedButton(
@@ -75,7 +80,7 @@ class _FeedbackContent extends State<FeedbackContent> {
             },
             child: Text(
               "保存数据",
-              style: TextStyle(fontSize: 23, color: Colors.red),
+              style: TextStyle(fontSize: 14, color: Colors.red),
             ),
           ),
           RaisedButton(
@@ -95,17 +100,18 @@ class _FeedbackContent extends State<FeedbackContent> {
             },
             child: Text(
               "读取数据",
-              style: TextStyle(fontSize: 23, color: Colors.red),
+              style: TextStyle(fontSize: 14, color: Colors.red),
             ),
           ),
           RaisedButton(
+            color: Colors.red,
             onPressed: () {
               sharedPreferencesDataUtils.deleteUserInfo("name");
               sharedPreferencesDataUtils.deleteUserInfo("age");
             },
             child: Text(
               "删除数据",
-              style: TextStyle(fontSize: 23, color: Colors.black),
+              style: TextStyle(fontSize: 14, color: Colors.white),
             ),
           ),
           Container(
@@ -117,14 +123,6 @@ class _FeedbackContent extends State<FeedbackContent> {
                 Text("年龄:" + "$userAge")
               ],
             ),
-          ),
-          RaisedButton(
-            onPressed: () {
-              print("别点我啊");
-            },
-            color: Colors.red,
-            textColor: Colors.white,
-            child: Text("别点我"),
           ),
           MaterialButton(
             onPressed: () {
@@ -150,20 +148,120 @@ class _FeedbackContent extends State<FeedbackContent> {
                 onChanged: (checked) {
                   print(checked);
                 },
+                tristate: true,
               ),
               Checkbox(
-                value: false,
+                value: isChecked, // 控件状态值
                 onChanged: (checked) {
-                  print(checked);
+                  print("checked = $checked");
+                  setState(() {
+                    // 状态改变后需要通过setState刷新Widget改变状态
+                    this.isChecked = checked;
+                  });
                 },
-              ),
-              Checkbox(
-                value: false,
-                onChanged: (checked) {
-                  print(checked);
-                },
+                activeColor: Colors.blueAccent, // checkbox颜色
               ),
             ],
+          ),
+          Container(
+            color: Colors.red,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Radio<String>(
+                  value: "radioA",
+                  groupValue: _character,
+                  onChanged: (newValue) {
+                    setState(() {
+                      // 点击当前控件时更新状态
+                      _character = newValue;
+                    });
+                  },
+                ),
+                Radio<String>(
+                  value: "radioB",
+                  groupValue: _character,
+                  onChanged: (newValue) {
+                    setState(() {
+                      // 点击当前控件时更新状态
+                      _character = newValue;
+                    });
+                  },
+                ),
+                Radio<String>(
+                  value: "radioC",
+                  groupValue: _character,
+                  onChanged: (newValue) {
+                    setState(() {
+                      // 点击当前控件时更新状态
+                      _character = newValue;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: Row(
+              children: <Widget>[
+                CupertinoSwitch(
+                  value: isSwitchChecked,
+                  activeColor: Colors.yellow,
+                  onChanged: (newValue) {
+                    setState(() {
+                      this.isSwitchChecked = newValue;
+                    });
+                  },
+                ),
+                CupertinoSwitch(
+                  value: true,
+                ),
+                CupertinoSwitch(
+                  value: false,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.parse("20181209"),
+                      //初始选中日期
+                      firstDate: DateTime.parse("20181109"),
+                      //可选日期范围第一个日期
+                      lastDate: DateTime.parse("20190109"),
+                      //可选日期范围最后一个日期
+                      selectableDayPredicate: (dateTime) {
+                        //通过此方法可以过滤掉可选范围内不可选的特定日期
+                        if (dateTime.day == 10 ||
+                            dateTime.day == 20 ||
+                            dateTime.day == 30) {
+                          //此处表示10号、20号、30号不可选
+                          return false;
+                        }
+                        return true;
+                      },
+                      initialDatePickerMode:
+                          DatePickerMode.day, //初始化选择模式，有day和year两种
+                    ).then((dateTime) {
+                      //选择日期后点击OK拿到的日期结果
+                      print(
+                          '当前选择了：${dateTime.year}年${dateTime.month}月${dateTime.day}日');
+                    });
+                  },
+                  color: Colors.red,
+                  child: Text(
+                    "弹出日期选择框",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
