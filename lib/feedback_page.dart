@@ -34,13 +34,24 @@ class _FeedbackContent extends State<FeedbackContent> {
 
   String userName = "";
   int userAge = 0;
-  int count = 0;
   var isChecked = false;
   String _character = 'A';
   var isSwitchChecked = false;
 
   @override
   void initState() {
+    Future<dynamic> name = sharedPreferencesDataUtils.getUserInfo("name");
+    name.then((dynamic nameValue) {
+      setState(() {
+        userName = nameValue;
+      });
+    });
+    Future<dynamic> age = sharedPreferencesDataUtils.getUserInfo("age");
+    age.then((dynamic ageValue) {
+      setState(() {
+        userAge = ageValue;
+      });
+    });
     super.initState();
   }
 
@@ -74,9 +85,8 @@ class _FeedbackContent extends State<FeedbackContent> {
           ),
           RaisedButton(
             onPressed: () {
-              sharedPreferencesDataUtils.setUserInfo(
-                  "name", "彭宽旺" + count.toString());
-              sharedPreferencesDataUtils.setUserInfo("age", 213 + count++);
+              sharedPreferencesDataUtils.setUserInfo("name", "彭宽旺");
+              sharedPreferencesDataUtils.setUserInfo("age", 213);
             },
             child: Text(
               "保存数据",
@@ -108,6 +118,10 @@ class _FeedbackContent extends State<FeedbackContent> {
             onPressed: () {
               sharedPreferencesDataUtils.deleteUserInfo("name");
               sharedPreferencesDataUtils.deleteUserInfo("age");
+              setState(() {
+                userName = "默认";
+                userAge = 0;
+              });
             },
             child: Text(
               "删除数据",
@@ -119,8 +133,8 @@ class _FeedbackContent extends State<FeedbackContent> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text("姓名:" + "$userName"),
-                Text("年龄:" + "$userAge")
+                Text("姓名:" + "${this.userName}"),
+                Text("年龄:" + "${this.userAge}")
               ],
             ),
           ),
