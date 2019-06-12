@@ -1,6 +1,5 @@
-import 'dart:_http';
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -27,11 +26,6 @@ class MyApp extends StatelessWidget {
 
   Future getHttpRequest() async {
     var httpClient = new HttpClient();
-    httpClient.findProxy = (url) {
-      return HttpClient.findProxyFromEnvironment(url, environment: {
-        "http_proxy": 'http://192.168.124.94:8888',
-      });
-    };
     //请求参数设置
     Map<String, String> queryParameters = {
       'format': '2',
@@ -40,12 +34,11 @@ class MyApp extends StatelessWidget {
       'lat': '39.933748'
     };
     var uri = Uri.http('v.juhe.cn', '/weather/geo', queryParameters);
-    var request = await httpClient.getUrl(uri);
+    var request = await httpClient.postUrl(uri);
     var response = await request.close();
     if (response.statusCode == 200) {
-      print('请求成功');
       var responseBody = await response.transform(utf8.decoder).join();
-      print('responseBody = $responseBody');
+      print(responseBody);
     } else {
       print('请求失败');
     }
